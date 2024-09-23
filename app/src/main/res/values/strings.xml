@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DAZN</string>
+    <string name="try_again">DAZN</string>
+    <string name="common_error_message">DAZN</string>
 </resources>
