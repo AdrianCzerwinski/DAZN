@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.ui.theme
+package pl.adrianczerwinski.dazn.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

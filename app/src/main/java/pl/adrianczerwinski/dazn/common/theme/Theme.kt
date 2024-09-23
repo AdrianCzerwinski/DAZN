@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.ui.theme
+package pl.adrianczerwinski.dazn.common.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

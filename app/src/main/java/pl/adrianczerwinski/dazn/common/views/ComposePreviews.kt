@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.ui
+package pl.adrianczerwinski.dazn.common.views
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.adrianczerwinski.dazn.ui.theme.DAZNTheme
+import pl.adrianczerwinski.dazn.common.theme.DAZNTheme
 
 @Composable
 fun ColumnPreview(

@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.ui.components
+package pl.adrianczerwinski.dazn.common.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

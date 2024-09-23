@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.ui.theme
+package pl.adrianczerwinski.dazn.common.theme
 
 import androidx.compose.ui.graphics.Color
 

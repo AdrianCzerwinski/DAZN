@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.ui.common
+package pl.adrianczerwinski.dazn.common.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.adrianczerwinski.dazn.R
-import pl.adrianczerwinski.ui.ColumnPreview
-import pl.adrianczerwinski.ui.LightDarkPreview
 
 @Composable
 fun CommonError(
