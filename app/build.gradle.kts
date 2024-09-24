@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.datetime)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.moshi)
+    implementation(libs.moshi.kotlin)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

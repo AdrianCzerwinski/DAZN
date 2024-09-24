@@ -1,42 +1,48 @@
 package pl.adrianczerwinski.dazn.events.di
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import pl.adrianczerwinski.dazn.events.network.EventsClient
 import pl.adrianczerwinski.dazn.events.network.EventsNetworkValues.BASE_URL
-import pl.adrianczerwinski.dazn.events.network.EventsNetworkValues.CONNECTION_TIMEOUT
-import pl.adrianczerwinski.dazn.events.network.EventsNetworkValues.READ_TIMEOUT
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface HiltNetworkModule {
+object HiltNetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() = OkHttpClient.Builder()
-        .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-        .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
-        .build()
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+    }
 
     @Provides
     @Singleton
-    fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory
-    ) = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .client(okHttpClient)
-        .build()
+    fun provideConverterFactory(moshi: Moshi): Converter.Factory {
+        return MoshiConverterFactory.create(moshi)
+    }
 
     @Provides
-    fun provideEventsClient(retrofit: Retrofit): EventsClient = retrofit.create(EventsClient::class.java)
+    @Singleton
+    fun provideRetrofit(converterFactory: Converter.Factory): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(converterFactory)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideEventsClient(retrofit: Retrofit): EventsClient {
+        return retrofit.create(EventsClient::class.java)
+    }
 }

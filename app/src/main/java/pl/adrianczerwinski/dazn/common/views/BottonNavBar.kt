@@ -27,7 +27,8 @@ internal fun BottomNavBar(
     onScheduleClick: () -> Unit = {}
 ) {
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        tonalElevation = 2.dp
     ) {
         BottomNavItem(
             isOnTop = currentRoute == EVENTS,

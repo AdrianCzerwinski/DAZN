@@ -14,6 +14,8 @@ class EventsRepositoryImpl @Inject constructor(
         restClient.getEvents()
     }.fold(
         onSuccess = { events -> Result.success(mapper.mapToEvents(events)) },
-        onFailure = { error -> Result.failure(error) }
+        onFailure = { error ->
+            Result.failure(error)
+        }
     )
 }
