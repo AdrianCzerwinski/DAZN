@@ -20,7 +20,7 @@ class EventsMapper @Inject constructor(
                 subtitle = subtitle
             )
         }
-    }
+    }.sortedBy { it.date.time }
 
     private fun getDate(date: String): Date {
         return Date(

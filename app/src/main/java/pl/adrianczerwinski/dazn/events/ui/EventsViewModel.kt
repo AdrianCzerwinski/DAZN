@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import pl.adrianczerwinski.dazn.events.domain.usecase.GetEventsUseCase
 import pl.adrianczerwinski.dazn.events.ui.model.EventsUiState
@@ -19,13 +17,11 @@ class EventsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(EventsUiState())
-    val state = _state
-        .onStart { getEvents() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(),
-            initialValue = EventsUiState()
-        )
+    val state = _state.asStateFlow()
+
+    init {
+        getEvents()
+    }
 
     fun getEvents() = viewModelScope.launch {
         _state.value = _state.value.copy(screenState = ScreenState.LOADING)
