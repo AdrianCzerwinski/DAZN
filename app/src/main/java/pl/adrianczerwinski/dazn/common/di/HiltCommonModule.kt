@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.events.di
+package pl.adrianczerwinski.dazn.common.di
 
 import dagger.Module
 import dagger.Provides

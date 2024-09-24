@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.events.di
+package pl.adrianczerwinski.dazn.common.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.adrianczerwinski.dazn.events.network.EventsClient
-import pl.adrianczerwinski.dazn.events.network.EventsNetworkValues.BASE_URL
+import pl.adrianczerwinski.dazn.common.network.NetworkValues.BASE_URL
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
