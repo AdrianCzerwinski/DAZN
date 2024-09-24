@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "pl.adrianczerwinski.dazn"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -51,8 +51,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.coil)
-    implementation(libs.moshi)
+    implementation(libs.converter.moshi)
     implementation(libs.retrofit)
+    implementation(libs.datetime)
     implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
