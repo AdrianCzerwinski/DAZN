@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">DAZN</string>
-    <string name="try_again">DAZN</string>
-    <string name="common_error_message">DAZN</string>
+    <string name="try_again">Try Again</string>
+    <string name="common_error_message">Ups… Something went wrong</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

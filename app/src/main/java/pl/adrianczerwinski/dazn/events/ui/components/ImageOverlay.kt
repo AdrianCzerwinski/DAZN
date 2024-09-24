@@ -9,9 +9,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import pl.adrianczerwinski.dazn.R
+import pl.adrianczerwinski.dazn.common.DateType
 import pl.adrianczerwinski.dazn.common.views.GradientOverlay
+import pl.adrianczerwinski.dazn.events.domain.model.Date
 import pl.adrianczerwinski.dazn.events.domain.model.Event
 
 @Composable
@@ -33,7 +37,7 @@ internal fun BoxScope.ImageOverlay(
         }
 
         Text(
-            text = event.date,
+            text = getDateText(date = event.date),
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSecondary,
             modifier = Modifier
@@ -41,4 +45,23 @@ internal fun BoxScope.ImageOverlay(
                 .padding(12.dp)
         )
     }
+}
+
+@Composable
+private fun getDateText(date: Date): String {
+
+    val suffix = when(date.type) {
+        DateType.YESTERDAY -> stringResource(id = R.string.yesterday)
+        DateType.TODAY -> stringResource(id = R.string.today)
+        DateType.TOMORROW -> stringResource(id = R.string.tomorrow)
+        DateType.STANDARD -> ""
+    }
+
+    val dateTime = if (date.type == DateType.STANDARD) {
+        "${date.date}, ${date.time}"
+    } else {
+        ", ${date.time}"
+    }
+
+    return suffix + dateTime
 }
