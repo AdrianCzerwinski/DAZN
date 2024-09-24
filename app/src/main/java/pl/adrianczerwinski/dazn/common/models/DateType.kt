@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.common
+package pl.adrianczerwinski.dazn.common.models
 
 enum class DateType {
     YESTERDAY,

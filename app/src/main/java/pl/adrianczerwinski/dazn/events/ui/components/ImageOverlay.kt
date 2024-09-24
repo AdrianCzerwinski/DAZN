@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import pl.adrianczerwinski.dazn.R
-import pl.adrianczerwinski.dazn.common.DateType
+import pl.adrianczerwinski.dazn.common.models.DateType
 import pl.adrianczerwinski.dazn.common.views.GradientOverlay
 import pl.adrianczerwinski.dazn.events.domain.model.Date
 import pl.adrianczerwinski.dazn.events.domain.model.Event

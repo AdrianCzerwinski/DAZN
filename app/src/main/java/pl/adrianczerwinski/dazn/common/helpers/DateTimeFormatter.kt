@@ -1,6 +1,6 @@
 package pl.adrianczerwinski.dazn.common.helpers
 
-import pl.adrianczerwinski.dazn.common.DateType
+import pl.adrianczerwinski.dazn.common.models.DateType
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
