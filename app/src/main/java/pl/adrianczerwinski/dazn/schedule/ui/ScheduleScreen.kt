@@ -14,6 +14,7 @@ import pl.adrianczerwinski.dazn.common.models.ScreenState
 import pl.adrianczerwinski.dazn.common.views.CommonError
 import pl.adrianczerwinski.dazn.schedule.domain.model.ScheduledEvent
 import pl.adrianczerwinski.dazn.schedule.ui.components.ScheduleEventItem
+import pl.adrianczerwinski.dazn.schedule.ui.model.ScheduleUiState
 
 @Composable
 fun ScheduleScreen(

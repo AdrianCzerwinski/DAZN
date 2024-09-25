@@ -10,7 +10,7 @@ import pl.adrianczerwinski.dazn.events.ui.model.EventsUiState
 import pl.adrianczerwinski.dazn.main.nav.BottomNavDestinations.EVENTS
 import pl.adrianczerwinski.dazn.main.nav.BottomNavDestinations.SCHEDULE
 import pl.adrianczerwinski.dazn.schedule.ui.ScheduleScreen
-import pl.adrianczerwinski.dazn.schedule.ui.ScheduleUiState
+import pl.adrianczerwinski.dazn.schedule.ui.model.ScheduleUiState
 
 @Composable
 internal fun AppNavigation(

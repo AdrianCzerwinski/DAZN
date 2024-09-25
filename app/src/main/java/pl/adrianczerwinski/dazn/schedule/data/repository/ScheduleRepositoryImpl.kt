@@ -1,6 +1,8 @@
 package pl.adrianczerwinski.dazn.schedule.data.repository
 
-import android.util.Log
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import pl.adrianczerwinski.dazn.schedule.data.mapper.ScheduledEventsMapper
 import pl.adrianczerwinski.dazn.schedule.domain.model.ScheduledEvent
 import pl.adrianczerwinski.dazn.schedule.network.ScheduleClient
@@ -11,13 +13,16 @@ class ScheduleRepositoryImpl @Inject constructor(
     private val mapper: ScheduledEventsMapper
 ) : ScheduleRepository {
 
-    override suspend fun getSchedule(): Result<List<ScheduledEvent>> = runCatching {
-        restClient.getSchedule()
-    }.fold(
-        onSuccess = { events -> Result.success(mapper.mapToUpcomingEvents(events)) },
-        onFailure = { error ->
-            Log.d("ScheduleRepositoryImpl", "getSchedule: $error")
-            Result.failure(error)
+    override fun getSchedule(): Flow<Result<List<ScheduledEvent>>> = flow {
+        while (true) {
+            val result = runCatching {
+                restClient.getSchedule()
+            }.fold(
+                onSuccess = { events -> Result.success(mapper.mapToUpcomingEvents(events)) },
+                onFailure = { error -> Result.failure(error) }
+            )
+            emit(result)
+            delay(30000)
         }
-    )
+    }
 }
