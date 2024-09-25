@@ -1,7 +1,7 @@
 # DAZN
 
 ## Features Implemented
-- all features listed in the Test Assignment
+- all features listed in the Test Assignment (also with bonus features)
 
 ## Design changes
 - Events presented in a bit different way
