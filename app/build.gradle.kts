@@ -57,6 +57,10 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
+    implementation("androidx.media3:media3-exoplayer:1.4.1")
+    implementation("androidx.media3:media3-ui:1.4.1")
+    implementation("androidx.media3:media3-common:1.4.1")
+    implementation("androidx.compose.foundation:foundation:1.4.3")
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
