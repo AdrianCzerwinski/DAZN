@@ -2,6 +2,7 @@
     <string name="app_name">DAZN</string>
     <string name="try_again">Try Again</string>
     <string name="common_error_message">Ups… Something went wrong</string>
+    <string name="common_empty_state_message">Nothing to show, it is empty</string>
     <string name="yesterday">Yesterday</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>

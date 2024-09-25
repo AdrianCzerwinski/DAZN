@@ -1,17 +1,17 @@
 package pl.adrianczerwinski.dazn.schedule.ui
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import pl.adrianczerwinski.dazn.common.models.Date
+import pl.adrianczerwinski.dazn.common.models.DateType
 import pl.adrianczerwinski.dazn.common.models.ScreenState
-import pl.adrianczerwinski.dazn.common.views.CommonError
+import pl.adrianczerwinski.dazn.common.views.CommonErrorScreen
+import pl.adrianczerwinski.dazn.common.views.CommonLoadingScreen
+import pl.adrianczerwinski.dazn.common.views.LightDarkPreview
+import pl.adrianczerwinski.dazn.common.views.ScreenPreview
 import pl.adrianczerwinski.dazn.schedule.domain.model.ScheduledEvent
 import pl.adrianczerwinski.dazn.schedule.ui.components.ScheduleEventItem
 import pl.adrianczerwinski.dazn.schedule.ui.model.ScheduleUiState
@@ -27,23 +27,11 @@ fun ScheduleScreen(
         when (state.screenState) {
             ScreenState.CONTENT -> ScheduleList(state.events)
 
-            ScreenState.LOADING -> Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator(modifier = Modifier.size(60.dp))
-            }
+            ScreenState.LOADING -> CommonLoadingScreen()
 
-            ScreenState.ERROR -> Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CommonError { onRetrySchedule() }
-            }
+            ScreenState.ERROR -> CommonErrorScreen { onRetrySchedule() }
 
-            ScreenState.EMPTY -> {}
+            ScreenState.EMPTY -> CommonErrorScreen()
         }
     }
 }
@@ -57,4 +45,38 @@ private fun ScheduleList(eventsList: List<ScheduledEvent>) {
             )
         }
     }
+}
+
+@LightDarkPreview
+@Composable
+fun ScheduleScreenPreview() = ScreenPreview {
+    ScheduleScreen(
+        state = ScheduleUiState(
+            screenState = ScreenState.CONTENT,
+            events = listOf(
+                ScheduledEvent(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    subtitle = "subtitle",
+                ),
+                ScheduledEvent(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    subtitle = "subtitle",
+                ),
+                ScheduledEvent(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    subtitle = "subtitle",
+                ),
+            )
+        ),
+        onRetrySchedule = {}
+    )
 }

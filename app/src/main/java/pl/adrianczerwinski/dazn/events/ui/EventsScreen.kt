@@ -1,17 +1,17 @@
 package pl.adrianczerwinski.dazn.events.ui
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import pl.adrianczerwinski.dazn.common.models.Date
+import pl.adrianczerwinski.dazn.common.models.DateType
 import pl.adrianczerwinski.dazn.common.models.ScreenState
-import pl.adrianczerwinski.dazn.common.views.CommonError
+import pl.adrianczerwinski.dazn.common.views.CommonErrorScreen
+import pl.adrianczerwinski.dazn.common.views.CommonLoadingScreen
+import pl.adrianczerwinski.dazn.common.views.LightDarkPreview
+import pl.adrianczerwinski.dazn.common.views.ScreenPreview
 import pl.adrianczerwinski.dazn.events.domain.model.Event
 import pl.adrianczerwinski.dazn.events.ui.components.EventItem
 import pl.adrianczerwinski.dazn.events.ui.model.EventsUiState
@@ -28,23 +28,11 @@ fun EventsScreen(
         when (state.screenState) {
             ScreenState.CONTENT -> EventsList(state.events) { onEventClick(it) }
 
-            ScreenState.LOADING -> Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator(modifier = Modifier.size(60.dp))
-            }
+            ScreenState.LOADING -> CommonLoadingScreen()
 
-            ScreenState.ERROR -> Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CommonError { onRetryEvents() }
-            }
+            ScreenState.ERROR -> CommonErrorScreen { onRetryEvents() }
 
-            ScreenState.EMPTY -> {}
+            ScreenState.EMPTY -> CommonErrorScreen()
         }
     }
 }
@@ -62,4 +50,42 @@ private fun EventsList(
             )
         }
     }
+}
+
+@LightDarkPreview
+@Composable
+fun EventsScreenPreview() = ScreenPreview {
+    EventsScreen(
+        state = EventsUiState(
+            screenState = ScreenState.CONTENT,
+            events = listOf(
+                Event(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    videoUrl = "https://www.youtube.com/watch?v=123",
+                    subtitle = "subtitle",
+                ),
+                Event(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    videoUrl = "https://www.youtube.com/watch?v=123",
+                    subtitle = "subtitle",
+                ),
+                Event(
+                    id = "1",
+                    title = "Event 1",
+                    date = Date("2022-01-01", "12:00", DateType.STANDARD),
+                    imageUrl = "https://via.placeholder.com/150",
+                    videoUrl = "https://www.youtube.com/watch?v=123",
+                    subtitle = "subtitle",
+                )
+            )
+        ),
+        onEventClick = {},
+        onRetryEvents = {}
+    )
 }
