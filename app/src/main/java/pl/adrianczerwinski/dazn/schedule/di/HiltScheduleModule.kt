@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import pl.adrianczerwinski.dazn.schedule.data.repository.ScheduleRepository
 import pl.adrianczerwinski.dazn.schedule.data.repository.ScheduleRepositoryImpl
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 interface HiltScheduleModule {
 
     @Binds

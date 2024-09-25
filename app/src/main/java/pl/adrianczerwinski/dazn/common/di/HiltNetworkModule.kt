@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import pl.adrianczerwinski.dazn.events.network.EventsClient
 import pl.adrianczerwinski.dazn.common.network.NetworkValues.BASE_URL
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -32,17 +31,10 @@ object HiltNetworkModule {
     }
 
     @Provides
-    @Singleton
     fun provideRetrofit(converterFactory: Converter.Factory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(converterFactory)
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideEventsClient(retrofit: Retrofit): EventsClient {
-        return retrofit.create(EventsClient::class.java)
     }
 }

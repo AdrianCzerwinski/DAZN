@@ -1,4 +1,4 @@
-package pl.adrianczerwinski.dazn.events.ui
+package pl.adrianczerwinski.dazn.schedule.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,21 +12,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pl.adrianczerwinski.dazn.common.models.ScreenState
 import pl.adrianczerwinski.dazn.common.views.CommonError
-import pl.adrianczerwinski.dazn.events.domain.model.Event
-import pl.adrianczerwinski.dazn.events.ui.components.EventItem
-import pl.adrianczerwinski.dazn.events.ui.model.EventsUiState
+import pl.adrianczerwinski.dazn.schedule.domain.model.ScheduledEvent
+import pl.adrianczerwinski.dazn.schedule.ui.components.ScheduleEventItem
 
 @Composable
-fun EventsScreen(
-    state: EventsUiState,
-    onEventClick: (String) -> Unit,
-    onRetryEvents: () -> Unit
+fun ScheduleScreen(
+    state: ScheduleUiState,
+    onRetrySchedule: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         when (state.screenState) {
-            ScreenState.CONTENT -> EventsList(state.events) { onEventClick(it) }
+            ScreenState.CONTENT -> ScheduleList(state.events)
 
             ScreenState.LOADING -> Column(
                 modifier = Modifier.fillMaxSize(),
@@ -41,7 +39,7 @@ fun EventsScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                CommonError { onRetryEvents() }
+                CommonError { onRetrySchedule() }
             }
 
             ScreenState.EMPTY -> {}
@@ -50,15 +48,11 @@ fun EventsScreen(
 }
 
 @Composable
-private fun EventsList(
-    eventsList: List<Event>,
-    onEventClick: (String) -> Unit
-) {
+private fun ScheduleList(eventsList: List<ScheduledEvent>) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(eventsList.size) { index ->
-            EventItem(
-                event = eventsList[index],
-                onEventClick = onEventClick
+            ScheduleEventItem(
+                event = eventsList[index]
             )
         }
     }

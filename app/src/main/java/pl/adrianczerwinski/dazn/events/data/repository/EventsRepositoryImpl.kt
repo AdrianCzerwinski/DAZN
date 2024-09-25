@@ -10,12 +10,10 @@ class EventsRepositoryImpl @Inject constructor(
     private val mapper: EventsMapper
 ) : EventsRepository {
 
-    override suspend fun getEvents(): Result<List<Event>> = kotlin.runCatching {
+    override suspend fun getEvents(): Result<List<Event>> = runCatching {
         restClient.getEvents()
     }.fold(
         onSuccess = { events -> Result.success(mapper.mapToEvents(events)) },
-        onFailure = { error ->
-            Result.failure(error)
-        }
+        onFailure = { error -> Result.failure(error) }
     )
 }

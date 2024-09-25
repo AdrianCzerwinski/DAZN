@@ -22,6 +22,7 @@ import pl.adrianczerwinski.dazn.events.ui.EventsViewModel
 import pl.adrianczerwinski.dazn.main.nav.BottomNavDestinations.EVENTS
 import pl.adrianczerwinski.dazn.main.nav.BottomNavDestinations.SCHEDULE
 import pl.adrianczerwinski.dazn.main.nav.AppNavigation
+import pl.adrianczerwinski.dazn.schedule.ui.ScheduleViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -37,10 +38,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val eventsViewModel: EventsViewModel by viewModels()
+        val scheduleViewModel: ScheduleViewModel by viewModels()
 
         setContent {
-            val eventsState = eventsViewModel.state.collectAsStateWithLifecycle().value
-
             DAZNTheme {
                 val navController = rememberNavController()
                 val backStackEntry by navController.currentBackStackEntryAsState()
@@ -62,9 +62,11 @@ class MainActivity : ComponentActivity() {
                         AppNavigation(
                             modifier = Modifier.padding(it),
                             navHostController = navController,
-                            eventsUiState = eventsState,
+                            eventsUiState = eventsViewModel.state.collectAsStateWithLifecycle().value,
+                            scheduleUiState = scheduleViewModel.state.collectAsStateWithLifecycle().value,
                             onEventClick = {},
-                            onRetryEvents = { eventsViewModel.getEvents() }
+                            onRetryEvents = { eventsViewModel.getEvents() },
+                            onRetrySchedule = { scheduleViewModel.getSchedule() }
                         )
                     }
                 }

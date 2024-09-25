@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import pl.adrianczerwinski.dazn.events.data.repository.EventsRepository
 import pl.adrianczerwinski.dazn.events.data.repository.EventsRepositoryImpl
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 interface HiltEventsModule {
 
     @Binds

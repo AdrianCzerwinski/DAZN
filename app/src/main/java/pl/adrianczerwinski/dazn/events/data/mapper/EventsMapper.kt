@@ -1,8 +1,8 @@
 package pl.adrianczerwinski.dazn.events.data.mapper
 
 import pl.adrianczerwinski.dazn.common.helpers.DateTimeFormatter
+import pl.adrianczerwinski.dazn.common.models.Date
 import pl.adrianczerwinski.dazn.events.data.model.EventResponse
-import pl.adrianczerwinski.dazn.events.domain.model.Date
 import pl.adrianczerwinski.dazn.events.domain.model.Event
 import javax.inject.Inject
 
