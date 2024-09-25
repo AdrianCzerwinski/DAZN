@@ -2,7 +2,6 @@ package pl.adrianczerwinski.dazn.common.helpers
 
 import pl.adrianczerwinski.dazn.common.models.DateType
 import java.time.OffsetDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Locale
@@ -11,7 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 class DateTimeFormatter @Inject constructor(
-    private val locale: Locale
+    private val locale: Locale,
+    private val currentDate: CurrentDate
 ) {
     fun formatDate(dateTimeString: String): String {
         val formatter = DateTimeFormatter.ofPattern(TEXT_YEAR_MONTH_DAY, locale)
@@ -35,17 +35,17 @@ class DateTimeFormatter @Inject constructor(
     }
 
     private fun isToday(dateTime: OffsetDateTime): Boolean {
-        val today = OffsetDateTime.now(ZoneId.systemDefault()).truncatedTo(ChronoUnit.DAYS).dayOfYear
+        val today = currentDate.getCurrentDate().truncatedTo(ChronoUnit.DAYS).dayOfYear
         return dateTime.truncatedTo(ChronoUnit.DAYS).dayOfYear == today
     }
 
     private fun isYesterday(dateTime: OffsetDateTime): Boolean {
-        val yesterday = OffsetDateTime.now(ZoneId.systemDefault()).minusDays(1).truncatedTo(ChronoUnit.DAYS).dayOfYear
+        val yesterday = currentDate.getCurrentDate().minusDays(1).truncatedTo(ChronoUnit.DAYS).dayOfYear
         return dateTime.truncatedTo(ChronoUnit.DAYS).dayOfYear == yesterday
     }
 
     private fun isTomorrow(dateTime: OffsetDateTime): Boolean {
-        val tomorrow = OffsetDateTime.now(ZoneId.systemDefault()).plusDays(1).truncatedTo(ChronoUnit.DAYS).dayOfYear
+        val tomorrow = currentDate.getCurrentDate().plusDays(1).truncatedTo(ChronoUnit.DAYS).dayOfYear
         return dateTime.truncatedTo(ChronoUnit.DAYS).dayOfYear == tomorrow
     }
 
